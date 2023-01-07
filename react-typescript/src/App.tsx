@@ -1,42 +1,34 @@
-import React from 'react';
+import axios from 'axios';
+import React, { useState, useEffect } from 'react';
 import Card, { CardVariant } from './components/Card';
-import UserList from './components/UserList';
-import { IUser } from './types/types';
+import EventsExample from './components/EventsExample';
+import List from './components/List';
+import TodoItem from './components/TodoItem';
+import UserItem from './components/UserItem';
+import { ITodo, IUser } from './types/types';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import UserPage from './components/UserPage';
+import TodosPage from './components/TodosPage';
+import { Link } from 'react-router-dom';
+import UserItemPage from './components/UserItemPage';
+import TodoItemPage from './components/TodoItemPage';
 
 function App() {
-  const users: IUser[] = [
-    {
-      id: 1,
-      name: 'Leanne Graham',
-      email: 'Sincere@april.biz',
-      address: {
-        street: 'Kulas Light',
-        city: 'Gwenborough',
-        zipcode: '92998-3874',
-      },
-    },
-    {
-      id: 2,
-      name: 'Ervin Howell',
-      email: 'Shanna@melissa.tv',
-      address: {
-        street: 'Victor Plains',
-        city: 'Wisokyburgh',
-        zipcode: '90566-7771',
-      },
-    },
-  ];
   return (
-    <div className="App">
-      <Card
-        onClick={(num) => console.log('click', num)}
-        variant={CardVariant.primary}
-        width="200px"
-        height="200px">
-        <button>Кнопка</button>
-      </Card>
-      <UserList users={users} />
-    </div>
+    <BrowserRouter>
+      <div className="App">
+        <div>
+          <Link to="/users">UserPage</Link>
+          <Link to="/todos">TodosPAge</Link>
+        </div>
+        <Routes>
+          <Route path="/users" element={<UserPage />} />
+          <Route path="/todos" element={<TodosPage />} />
+          <Route path="/users/:id" element={<UserItemPage />} />
+          <Route path="/todo/:id" element={<TodoItemPage  />} />
+        </Routes>
+      </div>
+    </BrowserRouter>
   );
 }
 
